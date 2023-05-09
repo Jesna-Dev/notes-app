@@ -1,15 +1,28 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import { sendToVercelAnalytics } from './vitals';
+import './index.css'
 
-ReactDOM.render(
-  <React.StrictMode>
+import { Route, RouterProvider, createBrowserRouter } from 'react-router-dom'
+
+import App from './App'
+import NoteDetails from './NoteDetails'
+import NoteList from './NotesList'
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <NoteList />
+  },
+  {
+    path: '/notes/:id',
+    element: <NoteDetails />
+  }
+])
+
+const root = ReactDOM.createRoot(document.getElementById('root'))
+root.render(
+  <RouterProvider router={router}>
     <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
-
-reportWebVitals(sendToVercelAnalytics);
+    <Route path="/" element={<NoteList />} />
+  </RouterProvider>
+)
